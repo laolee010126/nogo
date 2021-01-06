@@ -620,4 +620,12 @@ export default styles = StyleSheet.create({
   line1: {
     borderWidth: 1,
   },
+  caidan_view: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginTop: 40 * PixelRatio,
+  },
+  caidan_text: {
+    fontSize: 22 * PixelRatio,
+  },
 });

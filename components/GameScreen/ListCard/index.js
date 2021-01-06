@@ -5,6 +5,7 @@ import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import goBoard from 'assets/images/goBoard.png';
 import axios from 'axios';
+import {log} from 'react-native-reanimated';
 
 let list = '0 0';
 
@@ -18,6 +19,7 @@ const ListCard = ({
 }) => {
   const navigation = useNavigation();
   const [isBot, setIsBot] = useState(false);
+  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     return () => {
@@ -109,7 +111,8 @@ const ListCard = ({
   const bot = () => {
     //네트워크 연결
     //const {data} = axios.post('bot', {data: list, bot});
-    const result = stringToNum(data);
+
+    const result = stringToNum('24');
     handleClickBot(result);
     setIsBot(false);
 
@@ -160,7 +163,7 @@ const ListCard = ({
       <TouchableOpacity
         style={styles.back}
         onPress={() => {
-          navigation.goBack();
+          navigation.navigate('MainScreen');
         }}>
         <Icon name="arrow-back-outline" size={25} />
       </TouchableOpacity>
@@ -765,6 +768,28 @@ const ListCard = ({
         </>
         <View style={styles.user_view}>
           <Text style={styles.user_text}>{`${user1} VS ${user2}`}</Text>
+        </View>
+        <View style={styles.caidan_view}>
+          <TouchableOpacity
+            onPress={() => {
+              console.log(squares);
+              setHistory(squares);
+              console.log(history);
+            }}>
+            <Text style={styles.caidan_text}>保存游戏</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setSquares(history);
+            }}>
+            <Text style={styles.caidan_text}>历史游戏</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setSquares(Array(81).fill(null));
+            }}>
+            <Text style={styles.caidan_text}>清空游戏</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </>
