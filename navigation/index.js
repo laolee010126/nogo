@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
@@ -12,6 +12,8 @@ import RuleScreen from '../screens/RuleScreen';
 import FeaturesScreen from '../screens/FeaturesScreen';
 import PausedGameScreen from '../screens/PausedGameScreen';
 import EndedGameScreen from '../screens/EndedGameScreen';
+import PreStartScreen from '../screens/PreStartScreen';
+import GameScreen from '../screens/GameScreen';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +30,8 @@ const Navigation = () => {
         <Stack.Screen name="FeaturesScreen" component={FeaturesScreen} />
         <Stack.Screen name="PausedGameScreen" component={PausedGameScreen} />
         <Stack.Screen name="EndedGameScreen" component={EndedGameScreen} />
+        <Stack.Screen name="PreStartScreen" component={PreStartScreen} />
+        <Stack.Screen name="GameScreen" component={GameScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

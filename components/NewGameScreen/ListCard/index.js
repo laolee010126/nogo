@@ -20,24 +20,7 @@ const ListCard = () => {
         <View style={styles.title_view}>
           <Text style={styles.title}>NoGo 不围棋</Text>
         </View>
-        <View style={styles.extraGame_view}>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={styles.extraGame_element_view}
-            onPress={() => {
-              navigation.navigate('PreStartScreen');
-            }}>
-            <Text style={styles.list_text}>人人对战</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={styles.extraGame_element_view}
-            onPress={() => {
-              navigation.navigate('PreStartScreen');
-            }}>
-            <Text style={styles.list_text}>机机对战</Text>
-          </TouchableOpacity>
-        </View>
+
         <View style={styles.list_view}>
           <Text style={styles.list_text1}>人机模式</Text>
         </View>
@@ -46,7 +29,7 @@ const ListCard = () => {
             activeOpacity={0.8}
             style={styles.extraGame_element_view}
             onPress={() => {
-              navigation.navigate('PreStartScreen');
+              navigation.navigate('PreStartScreen', {bot: '弱智'});
             }}>
             <Text style={styles.list_text}>弱智</Text>
           </TouchableOpacity>
@@ -54,7 +37,7 @@ const ListCard = () => {
             activeOpacity={0.8}
             style={styles.extraGame_element_view}
             onPress={() => {
-              navigation.navigate('PreStartScreen');
+              navigation.navigate('PreStartScreen', {bot: '简单'});
             }}>
             <Text style={styles.list_text}>简单</Text>
           </TouchableOpacity>
@@ -64,7 +47,7 @@ const ListCard = () => {
             activeOpacity={0.8}
             style={styles.extraGame_element_view}
             onPress={() => {
-              navigation.navigate('PreStartScreen');
+              navigation.navigate('PreStartScreen', {bot: '中等'});
             }}>
             <Text style={styles.list_text}>中等</Text>
           </TouchableOpacity>
@@ -72,7 +55,7 @@ const ListCard = () => {
             activeOpacity={0.8}
             style={styles.extraGame_element_view}
             onPress={() => {
-              navigation.navigate('PreStartScreen');
+              navigation.navigate('PreStartScreen', {bot: '困难'});
             }}>
             <Text style={styles.list_text}>困难</Text>
           </TouchableOpacity>

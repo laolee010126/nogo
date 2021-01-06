@@ -26,7 +26,7 @@ const ListCard = () => {
           onPress={() => {
             navigation.navigate('PausedGameScreen');
           }}>
-          <Text style={styles.list_text}>暂停游戏</Text>
+          <Text style={styles.list_text}>未完成游戏</Text>
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.8}
@@ -34,7 +34,7 @@ const ListCard = () => {
           onPress={() => {
             navigation.navigate('EndedGameScreen');
           }}>
-          <Text style={styles.list_text}>历史游戏</Text>
+          <Text style={styles.list_text}>已完成游戏</Text>
         </TouchableOpacity>
       </View>
     </>
