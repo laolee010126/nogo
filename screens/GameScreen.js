@@ -5,9 +5,9 @@ import ListCard from 'components/GameScreen/ListCard';
 
 export default function GameScreen({route}) {
   const {user1, user2} = route.params.users;
+  const {botlevel} = route.params;
 
   const [squares, setSquares] = useState(Array(81).fill(null));
-  const [error, setError] = useState(false);
   const [isBlackNext, setIsBlackNext] = useState(true);
 
   return (
@@ -20,6 +20,7 @@ export default function GameScreen({route}) {
         setSquares={setSquares}
         isBlackNext={isBlackNext}
         setIsBlackNext={setIsBlackNext}
+        botlevel={botlevel}
       />
     </View>
   );

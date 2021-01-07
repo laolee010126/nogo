@@ -4,7 +4,7 @@ import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const ListCard = ({title, bot}) => {
+const ListCard = ({title, bot, botLevel}) => {
   const navigation = useNavigation();
   const [name1, setName1] = useState('');
   const [name2, setName2] = useState(bot);
@@ -46,6 +46,7 @@ const ListCard = ({title, bot}) => {
           onPress={() => {
             navigation.navigate('GameScreen', {
               users: {user1: name1, user2: name2},
+              botLevel,
             });
           }}>
           <View style={styles.btn_view}>

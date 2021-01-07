@@ -13,6 +13,25 @@ export default styles = StyleSheet.create({
     backgroundColor: 'rgb(244,244,244)',
     elevation: 5 * PixelRatio,
   },
+  errMessage: {
+    height: 30 * PixelRatio,
+    alignItems: 'center',
+    marginTop: 10 * PixelRatio,
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  btn: {
+    width: 60 * PixelRatio,
+    height: 30 * PixelRatio,
+    borderWidth: 1 * PixelRatio,
+    marginLeft: 30 * PixelRatio,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10 * PixelRatio,
+  },
+  err_text: {
+    fontSize: 18 * PixelRatio,
+  },
   board: {
     width: 420 * PixelRatio,
     height: 420 * PixelRatio,

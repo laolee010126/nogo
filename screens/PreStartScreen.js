@@ -7,15 +7,16 @@ const PreStartScreen = ({route}) => {
   let bot;
   if (route.params) {
     bot = route.params.bot;
+    botLevel = route.params.botLevel;
   }
 
   return (
     <View>
       <BackGround />
       {bot ? (
-        <ListCard title="人机对战" bot={bot} />
+        <ListCard title="人机对战" bot={bot} botLevel={botLevel} />
       ) : (
-        <ListCard title="人人对战" bot={bot} />
+        <ListCard title="人人对战" bot={bot} botLevel={botLevel} />
       )}
     </View>
   );

@@ -27,20 +27,18 @@ const ListCard = () => {
         }}>
         <Text style={styles.list_text}>帮助</Text>
       </TouchableOpacity>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         activeOpacity={0.8}
         style={styles.list_view}
         onPress={() => {
           navigation.navigate('HistoryScreen');
         }}>
         <Text style={styles.list_text}>历史游戏</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <TouchableOpacity
         activeOpacity={0.8}
         style={styles.list_view}
-        onPress={() => {
-          navigation.navigate('ExitScreen');
-        }}>
+        onPress={() => {}}>
         <Text style={styles.list_text}>推出</Text>
       </TouchableOpacity>
     </View>

@@ -29,7 +29,10 @@ const ListCard = () => {
             activeOpacity={0.8}
             style={styles.extraGame_element_view}
             onPress={() => {
-              navigation.navigate('PreStartScreen', {bot: '弱智'});
+              navigation.navigate('PreStartScreen', {
+                bot: '弱智',
+                botLevel: 'bot1',
+              });
             }}>
             <Text style={styles.list_text}>弱智</Text>
           </TouchableOpacity>
@@ -37,7 +40,10 @@ const ListCard = () => {
             activeOpacity={0.8}
             style={styles.extraGame_element_view}
             onPress={() => {
-              navigation.navigate('PreStartScreen', {bot: '简单'});
+              navigation.navigate('PreStartScreen', {
+                bot: '简单',
+                botLevel: 'bot2',
+              });
             }}>
             <Text style={styles.list_text}>简单</Text>
           </TouchableOpacity>
@@ -47,7 +53,10 @@ const ListCard = () => {
             activeOpacity={0.8}
             style={styles.extraGame_element_view}
             onPress={() => {
-              navigation.navigate('PreStartScreen', {bot: '中等'});
+              navigation.navigate('PreStartScreen', {
+                bot: '中等',
+                botLevel: 'bot3',
+              });
             }}>
             <Text style={styles.list_text}>中等</Text>
           </TouchableOpacity>
@@ -55,7 +64,10 @@ const ListCard = () => {
             activeOpacity={0.8}
             style={styles.extraGame_element_view}
             onPress={() => {
-              navigation.navigate('PreStartScreen', {bot: '困难'});
+              navigation.navigate('PreStartScreen', {
+                bot: '困难',
+                botLevel: 'bot4',
+              });
             }}>
             <Text style={styles.list_text}>困难</Text>
           </TouchableOpacity>

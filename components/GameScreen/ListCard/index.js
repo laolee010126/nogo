@@ -5,7 +5,6 @@ import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import goBoard from 'assets/images/goBoard.png';
 import axios from 'axios';
-import {log} from 'react-native-reanimated';
 
 let list = '0 0';
 
@@ -16,10 +15,13 @@ const ListCard = ({
   setSquares,
   setIsBlackNext,
   isBlackNext,
+  botlevel,
 }) => {
   const navigation = useNavigation();
   const [isBot, setIsBot] = useState(false);
   const [history, setHistory] = useState([]);
+  const [panduanErr, setPanduanErr] = useState(false);
+  const [shengfuRes, setShengfuRes] = useState('0');
 
   useEffect(() => {
     return () => {
@@ -62,11 +64,13 @@ const ListCard = ({
     if (isBlackNext) {
       blackList = xy + ' ' + blackList;
       const newList = blackList + '0' + whiteList + '0';
-      list = newList;
+
+      return newList;
     } else {
       whiteList = xy + whiteList;
       const newList = blackList + '0' + ' ' + whiteList + '0';
-      list = newList;
+
+      return newList;
     }
   };
 
@@ -75,24 +79,31 @@ const ListCard = ({
     //checkLuoziList 만들기
     const checkLuozi = (xy) => {
       const checkList = list + ' ' + xy;
-      console.log(checkList);
+
       return checkList;
     };
 
     const check = checkLuozi(xy);
 
     //네트워크 연결
-    // const {data} = await axios.post('/panduan', {data: check});
-    // return data;
+    const {data} = await axios.post('http://10.0.2.2:8001/panduan', {
+      data: check,
+    });
+    return data.data;
   };
 
   //승부가 안났으면: 0, 흑 승리: 1, 백 승리: 2
   const shengfu = async (xy) => {
-    const list = makeList(xy);
-
+    const listData = makeList(xy);
+    console.log(list);
     //네트워크 연결
-    //const {data} = axios.post('shengfu', {data: list});
-    //return data;
+    const {data} = await axios.post('http://10.0.2.2:8001/shengfu', {
+      data: listData,
+    });
+    if (data.data === '0') {
+      list = listData;
+    }
+    return data.data;
   };
 
   const stringToNum = (stringNum) => {
@@ -108,27 +119,47 @@ const ListCard = ({
     if (num <= 99) return num - 19;
   };
 
-  const bot = () => {
-    //네트워크 연결
-    //const {data} = axios.post('bot', {data: list, bot});
-
-    const result = stringToNum('24');
+  const bot = async () => {
+    const {data} = await axios.post('http://10.0.2.2:8001/bot', {
+      data: list,
+      bot: 'bot4',
+    });
+    console.log(botlevel);
+    const result = await stringToNum(data.data);
     handleClickBot(result);
     setIsBot(false);
 
     return result;
   };
 
-  const handleClick = (i) => {
+  const handleClick = async (i) => {
     const newSquares = squares.slice();
     if (squares[i]) {
       return;
     }
     const xy = arrNumToMatchingString(i);
 
-    panduan(xy);
-    shengfu(xy);
-
+    const panduanRes = await panduan(xy);
+    if (panduanRes == '0') {
+      console.log('______________________');
+      console.log('착수 불가능!!!!!');
+      setPanduanErr(true);
+      console.log('______________________');
+      return;
+    }
+    const shengfuRes = await shengfu(xy);
+    if (shengfuRes == '1') {
+      console.log('______________________');
+      console.log('흑 승리');
+      setShengfuRes('1');
+      console.log('______________________');
+    }
+    if (shengfuRes == '2') {
+      console.log('______________________');
+      console.log('백 승리');
+      setShengfuRes('2');
+      console.log('______________________');
+    }
     if (isBlackNext) {
       newSquares[i] = 'black';
     } else {
@@ -139,16 +170,26 @@ const ListCard = ({
     setIsBot(true);
   };
 
-  const handleClickBot = (i) => {
+  const handleClickBot = async (i) => {
     const newSquares = squares.slice();
     if (squares[i]) {
       return;
     }
     const xy = arrNumToMatchingString(i);
 
-    panduan(xy);
-    shengfu(xy);
-
+    const shengfuRes = await shengfu(xy);
+    if (shengfuRes == '1') {
+      console.log('______________________');
+      console.log('흑 승리');
+      setShengfuRes('1');
+      console.log('______________________');
+    }
+    if (shengfuRes == '2') {
+      console.log('______________________');
+      console.log('백 승리');
+      setShengfuRes('2');
+      console.log('______________________');
+    }
     if (isBlackNext) {
       newSquares[i] = 'black';
     } else {
@@ -772,9 +813,7 @@ const ListCard = ({
         <View style={styles.caidan_view}>
           <TouchableOpacity
             onPress={() => {
-              console.log(squares);
               setHistory(squares);
-              console.log(history);
             }}>
             <Text style={styles.caidan_text}>保存游戏</Text>
           </TouchableOpacity>
@@ -787,10 +826,33 @@ const ListCard = ({
           <TouchableOpacity
             onPress={() => {
               setSquares(Array(81).fill(null));
+              list = '0 0';
             }}>
             <Text style={styles.caidan_text}>清空游戏</Text>
           </TouchableOpacity>
         </View>
+        {panduanErr && (
+          <View style={styles.errMessage}>
+            <Text style={styles.err_text}>该点不能下</Text>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => {
+                setPanduanErr(false);
+              }}>
+              <Text>ok</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        {shengfuRes == '1' && (
+          <View style={styles.errMessage}>
+            <Text style={styles.err_text}>黑获胜</Text>
+          </View>
+        )}
+        {shengfuRes == '2' && (
+          <View style={styles.errMessage}>
+            <Text style={styles.err_text}>白获胜</Text>
+          </View>
+        )}
       </View>
     </>
   );
