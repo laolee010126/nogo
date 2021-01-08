@@ -58,4 +58,14 @@ export default styles = StyleSheet.create({
   btn_text: {
     fontSize: 16 * PixelRatio,
   },
+  start_container: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: 250 * PixelRatio,
+  },
+  start_view: {
+    padding: 10 * PixelRatio,
+    borderWidth: 1 * PixelRatio,
+    borderRadius: 10 * PixelRatio,
+  },
 });

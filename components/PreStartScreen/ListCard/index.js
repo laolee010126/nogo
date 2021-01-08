@@ -8,6 +8,7 @@ const ListCard = ({title, bot, botLevel}) => {
   const navigation = useNavigation();
   const [name1, setName1] = useState('');
   const [name2, setName2] = useState(bot);
+  const [botBlack, setBotBlack] = useState(true);
   return (
     <>
       <TouchableOpacity
@@ -47,12 +48,33 @@ const ListCard = ({title, bot, botLevel}) => {
             navigation.navigate('GameScreen', {
               users: {user1: name1, user2: name2},
               botLevel,
+              botBlack,
             });
           }}>
           <View style={styles.btn_view}>
             <Text style={styles.vtn_text}>Play</Text>
           </View>
         </TouchableOpacity>
+        <View style={styles.start_container}>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              setBotBlack(true);
+            }}>
+            <View style={styles.start_view}>
+              <Text style={styles.vtn_text}>让BOT先下</Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={() => {
+              setBotBlack(false);
+            }}>
+            <View style={styles.start_view}>
+              <Text style={styles.vtn_text}>让我先下</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   );

@@ -16,6 +16,8 @@ const ListCard = ({
   setIsBlackNext,
   isBlackNext,
   botlevel,
+  botFirst,
+  setBotFirst,
 }) => {
   const navigation = useNavigation();
   const [isBot, setIsBot] = useState(false);
@@ -24,10 +26,14 @@ const ListCard = ({
   const [shengfuRes, setShengfuRes] = useState('0');
 
   useEffect(() => {
+    if (botFirst) {
+      bot();
+      setBotFirst(false);
+    }
     return () => {
       list = '0 0';
     };
-  }, []);
+  }, [botFirst]);
 
   useEffect(() => {
     if (isBot) {
@@ -142,7 +148,7 @@ const ListCard = ({
     const panduanRes = await panduan(xy);
     if (panduanRes == '0') {
       console.log('______________________');
-      console.log('착수 불가능!!!!!');
+      console.log('不能落子!!!!!');
       setPanduanErr(true);
       console.log('______________________');
       return;
@@ -150,13 +156,13 @@ const ListCard = ({
     const shengfuRes = await shengfu(xy);
     if (shengfuRes == '1') {
       console.log('______________________');
-      console.log('흑 승리');
+      console.log('黑色获胜');
       setShengfuRes('1');
       console.log('______________________');
     }
     if (shengfuRes == '2') {
       console.log('______________________');
-      console.log('백 승리');
+      console.log('白色获胜');
       setShengfuRes('2');
       console.log('______________________');
     }
@@ -180,13 +186,13 @@ const ListCard = ({
     const shengfuRes = await shengfu(xy);
     if (shengfuRes == '1') {
       console.log('______________________');
-      console.log('흑 승리');
+      console.log('黑色获胜');
       setShengfuRes('1');
       console.log('______________________');
     }
     if (shengfuRes == '2') {
       console.log('______________________');
-      console.log('백 승리');
+      console.log('白色获胜');
       setShengfuRes('2');
       console.log('______________________');
     }
