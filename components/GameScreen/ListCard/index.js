@@ -40,6 +40,12 @@ const ListCard = ({
       bot();
     }
   }, [isBot]);
+  const flag = 'botbot';
+  if (flag === 'botbot') {
+    useEffect(() => {
+      botbot();
+    }, [isBot]);
+  }
 
   const arrNumToMatchingString = (arrNum) => {
     if (arrNum <= 8) {
@@ -136,6 +142,18 @@ const ListCard = ({
     setIsBot(false);
 
     return result;
+  };
+
+  const botbot = async () => {
+    const {data} = await axios.post('http://10.0.2.2:8001/bot', {
+      data: list,
+      bot: 'bot4',
+    });
+    const result = await stringToNum(data.data);
+    setTimeout(() => {
+      handleClickBot(result);
+    }, 1000);
+    setIsBot(true);
   };
 
   const handleClick = async (i) => {

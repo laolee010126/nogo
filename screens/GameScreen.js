@@ -7,7 +7,6 @@ export default function GameScreen({route}) {
   const {user1, user2} = route.params.users;
   const {botlevel} = route.params;
   const {botBlack} = route.params;
-  console.log(botBlack);
 
   const [squares, setSquares] = useState(Array(81).fill(null));
   const [isBlackNext, setIsBlackNext] = useState(true);
